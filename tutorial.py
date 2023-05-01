@@ -48,7 +48,19 @@ def get_block(size):
     path = join("assets", "Terrain", "Terrain.png")
     image = pygame.image.load(path).convert_alpha()
     surface = pygame.Surface((size, size), pygame.SRCALPHA, 32)
-    rect = pygame.Rect(96, 0, size, size)
+
+    terrain_dict = {
+        "stone_brick": [0, 0],
+        "wooden": [0, 64],
+        "leaf": [0, 128],
+        "green_grass": [96, 0],
+        "orange_grass": [96, 64],
+        "purple_grass": [96, 128],
+        "red_brick": [272, 64]
+    }
+    terrain = "leaf"
+
+    rect = pygame.Rect(terrain_dict[terrain][0], terrain_dict[terrain][1], size, size)
     surface.blit(image, (0, 0), rect)
     return pygame.transform.scale2x(surface)
 
@@ -56,8 +68,8 @@ def get_block(size):
 class Player(pygame.sprite.Sprite):
     COLOR = (255, 0, 0)
     GRAVITY = 1
-    SPRITES = load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True)
-    ANIMATION_DELAY = 3
+    SPRITES = load_sprite_sheets("MainCharacters", "Rayla", 32, 32, True)
+    ANIMATION_DELAY = 5
 
     def __init__(self, x, y, width, height):
         super().__init__()
